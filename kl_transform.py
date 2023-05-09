@@ -4,7 +4,7 @@ import numpy as np
 def kl_transform(data):
     mat_t = data.T
     n = 0
-    mean_vector = []
+    mean_vector = [] #mean vector creation
     for n in range(len(mat_t)):
         mean_point = np.mean(mat_t[n])
         mean_vector.append(mean_point)
@@ -22,7 +22,7 @@ def kl_transform(data):
             row.append(covariance)
         covariance_matrix.append(row)
 
-    eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix)
+    eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix) #finding the eigenvalues
     sorted_indices = np.argsort(eigenvalues)[::-1]
     eigenvalues = eigenvalues[sorted_indices]
     eigenvectors = eigenvectors[:, sorted_indices]
@@ -30,6 +30,6 @@ def kl_transform(data):
 
     return transformed_data
 
-SIGMA_1 = np.array([[4.0, 2.0,.60], [4.2, 2.1,.59],[3.9,2.0,.58],[4.3,2.1,.62],[4.1,2.2,.63]])
+SIGMA_1 = np.array([[4.0, 2.0,.60], [4.2, 2.1,.59],[3.9,2.0,.58],[4.3,2.1,.62],[4.1,2.2,.63]]) #testing and it does the thing
 func_test=kl_transform(SIGMA_1)
 print("FUNC_TEST", func_test)
