@@ -1,10 +1,9 @@
-import numpy as np
-# data needs to be in the form where catagories are the colums and galaxies are the rows. 
-#Code could be more efficent but I would rather make my own functions over using built ins. 
+mport numpy as np
+
 def kl_transform(data):
     mat_t = data.T
     n = 0
-    mean_vector = [] #mean vector creation
+    mean_vector = []
     for n in range(len(mat_t)):
         mean_point = np.mean(mat_t[n])
         mean_vector.append(mean_point)
@@ -22,7 +21,7 @@ def kl_transform(data):
             row.append(covariance)
         covariance_matrix.append(row)
 
-    eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix) #finding the eigenvalues
+    eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix)
     sorted_indices = np.argsort(eigenvalues)[::-1]
     eigenvalues = eigenvalues[sorted_indices]
     eigenvectors = eigenvectors[:, sorted_indices]
@@ -30,6 +29,14 @@ def kl_transform(data):
 
     return transformed_data
 
-SIGMA_1 = np.array([[4.0, 2.0,.60], [4.2, 2.1,.59],[3.9,2.0,.58],[4.3,2.1,.62],[4.1,2.2,.63]]) #testing and it does the thing
+SIGMA_1 = np.array([[4.0, 2.0,.60], [4.2, 2.1,.59],[3.9,2.0,.58],[4.3,2.1,.62],[4.1,2.2,.63]])
 func_test=kl_transform(SIGMA_1)
 print("FUNC_TEST", func_test)
+
+
+#big_data=np.genfromtxt('/Users/jtturner/Dropbox/My Mac (Jacqueline’s MacBook Pro (3))/Downloads/304galaxiesreal.csv',delimiter=';'[0,:25])
+big_data=np.loadtxt('/Users/jtturner/Dropbox/My Mac (Jacqueline’s MacBook Pro (3))/Downloads/galaxy_edited_2.csv', delimiter=',', usecols=range(5))
+print(big_data)
+bd_test=kl_transform(big_data)
+print("process complete", bd_test)
+c = np.savetxt('kl_galaxies_v1.txt', (bd_test))
