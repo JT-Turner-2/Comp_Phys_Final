@@ -15,7 +15,6 @@ def kl_transform(data):
 #covarience matrix time
     covariance_matrix = []
     print("length of mean vector", len(mean_vector))
-    pdb.set_trace()
     for i in range(len(mean_vector)):
         row = []
         for j in range(len(mean_vector)):
@@ -134,3 +133,39 @@ print('transformed!')
 forgal13 = np.loadtxt('13gal.csv')
 transform_gal13 = kl_transform(forgal13)
 print('transformed!')
+
+#projections
+
+def projection(v,u):
+    v = np.array(v)
+    u = np.array(u)
+    v_norm = np.sqrt(sum(v**2))
+    proj_of_u_on_v = (np.matmul(v, np.matmul(u.T, v)/(v_norm**2)))
+    return proj_of_u_on_v
+
+projgal1 = projection(forgal1,transform_gal1)
+print('projected!')
+projgal2 = projection(forgal2,transform_gal2)
+print('projected!')
+projgal3 = projection(forgal3,transform_gal3)
+print('projected!')
+projgal4 = projection(forgal4,transform_gal4)
+print('projected!')
+projgal5 = projection(forgal5,transform_gal5)
+print('projected!')
+projgal6 = projection(forgal6,transform_gal6)
+print('projected!')
+projgal7 = projection(forgal7,transform_gal7)
+print('projected!')
+projgal8 = projection(forgal8,transform_gal8)
+print('projected!')
+projgal9 = projection(forgal9,transform_gal9)
+print('projected!')
+projgal10 = projection(forgal10,transform_gal10)
+print('projected!')
+projgal11 = projection(forgal11,transform_gal11)
+print('projected!')
+projgal12 = projection(forgal12,transform_gal12)
+print('projected!')
+projgal13 = projection(forgal13,transform_gal13)
+print('projected!')
